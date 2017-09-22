@@ -27,8 +27,19 @@ Browser Supported
 Installation
 ----------
 
-``` shell
+``` bash
 npm install --save tanwei-cc/js-trigger
+```
+
+Adduction
+----------
+
+``` javascript
+ import Trigger from 'js-trigger'; //ES6
+
+ var Trigger = require('js-trigger').default; //ES5
+ 
+ window.Trigger; //browser
 ```
 
 [Examples](https://tanwei-cc.github.io/js-trigger/examples/index.html)

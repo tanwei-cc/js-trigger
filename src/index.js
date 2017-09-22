@@ -14,7 +14,10 @@ function getInitalState() {
 
 /**
  * Trigger是一个JavaScript触发器插件，可通过指定频次、指定时间内触发指定的处理函数，使用场景如：限制日志频繁上传、限制ajax频繁调用、错误提醒、网络状态检测等
- * 
+ * 引入方式：
+ * import Trigger from 'js-trigger'; //ES6
+ * var Trigger = require('js-trigger').default; //ES5
+ * window.Trigger; //browser
  * @author Tango <tanwei_yx@126.com>
  * @version 1.0.0
  */
