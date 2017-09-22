@@ -226,6 +226,8 @@
                 if (!util.validProps(props)) return;
 
                 trigger.reset(props);
+                btnStop.show();
+                btnOpen.hide();
                 util.log("触发器" + btnReset.text());
             });
 
