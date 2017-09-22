@@ -24,7 +24,7 @@ Browser Supported
 | Mobile   | Opera Mobile    | 11.50   |
 | Mobile   | Safari Mobile   | all     |
 
-[Examples](src/index.html)
+[Examples](examples/index.html)
 ----------
 
 Installation
