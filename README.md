@@ -1,10 +1,12 @@
 js-trigger
 ==========
 
+https://tanwei-cc.github.io/js-trigger/
+
 Features
 ----------
 
-- 采用UMD（通用模块定义）
+- UMD Supported
 - Node Supported
 - Browser Supported
 
@@ -79,12 +81,16 @@ trigger.reset();
 
 //移除触发器监听事件
 trigger.off(handler);
+
 //重置所有触发器实例
 Trigger.resetAll();
+
 //打开所有触发器实例
 Trigger.openAll();
+
 //停止所有触发器实例
 Trigger.stopAll();
+
 //移除所有触发器实例
 Trigger.removeAll();
 
