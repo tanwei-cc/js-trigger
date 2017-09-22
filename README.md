@@ -8,6 +8,9 @@ Features
 - Node Supported
 - Browser Supported
 
+Browser Supported
+----------
+
 | Platform | Device          | Version |
 |----------|-----------------|---------|
 | Desktop  | Chrome          | all     |
@@ -21,7 +24,7 @@ Features
 | Mobile   | Opera Mobile    | 11.50   |
 | Mobile   | Safari Mobile   | all     |
 
-Examples
+[Examples](src/index.html)
 ----------
 
 Installation
