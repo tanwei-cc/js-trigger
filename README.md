@@ -31,18 +31,16 @@ Installation
 npm install --save tanwei-cc/js-trigger
 ```
 
-``` javascript
- import Trigger from 'js-trigger'; //ES6引入
-
- var Trigger = require('js-trigger').default; //ES5引入
-
- window.Trigger; //browser引入
-```
-
-[Examples](https://tanwei-cc.github.io/js-trigger/examples/index.html)
+Examples & [Tests](https://tanwei-cc.github.io/js-trigger/examples/index.html)
 ----------
 
 ``` javascript
+
+import Trigger from 'js-trigger'; //ES6引入
+
+var Trigger = require('js-trigger').default; //ES5引入
+
+window.Trigger; //browser引入
 
 var trigger = Trigger.create({
     name: '第一个触发器',
