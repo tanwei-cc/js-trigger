@@ -226,7 +226,7 @@ class Trigger {
  * @param {number} handlerCounter - 触发次数统计
  * @param {Date} startTime - 开始时间
  * @param {Date} endTime - 结束时间
- * @param {number} duration - 持续时间(ms)
+ * @param {number} duration - 持续时长(ms)
  * @param {Object[]} data - 追加数据，每次check进行传入
  */
 
