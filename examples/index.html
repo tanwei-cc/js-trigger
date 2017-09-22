@@ -105,17 +105,17 @@
             <div class="row">
                 <label class="col-sm-2"></label>
                 <div class="col-sm-10">
-                    <a id="btnRun" class="btn btn-success">运行</a>
-                    <a id="btnReset" class="btn btn-success">重置</a>
-                    <a id="btnStop" class="btn btn-danger">停止运行</a>
-                    <a id="btnOpen" class="btn btn-success">继续运行</a>
+                    <a id="btnRun" class="btn btn-success" hmt-event="button,click-run,1">运行</a>
+                    <a id="btnReset" class="btn btn-success" hmt-event="button,click-reset,1">重置</a>
+                    <a id="btnStop" class="btn btn-danger" hmt-event="button,click-stop,1">停止运行</a>
+                    <a id="btnOpen" class="btn btn-success" hmt-event="button,click-open,1">继续运行</a>
                 </div>
             </div>
         </form>
         <div id="logs" class="panel panel-default">
             <div class="panel-heading">日志记录
-                <a id="btnLogClear">清空</a>
-                <span class="caret pull-right"></span>
+                <a id="btnLogClear" hmt-event="button,click-logClear,1">清空</a>
+                <!-- <span class="caret pull-right"></span> -->
             </div>
             <div class="panel-body"></div>
         </div>
@@ -198,6 +198,14 @@
             },
             logClear: function() {
                 $("#logs>.panel-body").empty();
+            },
+            sendHmtEvent: function(value) {
+                if (value) {
+                    value = value.split(","); //category, action, opt_label, opt_value
+                    if (value.length > 0) {
+                        _hmt.push(['_trackEvent', value[0], value[1] || "", value[2] || "", value[3] || undefined]);
+                    }
+                }
             }
         };
         var trigger;
@@ -267,6 +275,10 @@
             // $(".panel-heading").click(function() {
             //     $(this).nextAll(".panel-body").toggle();
             // });
+
+            $(document).on("click", "[hmt-event]", function() {
+                util.sendHmtEvent($(this).attr("hmt-event"));
+            });
         });
     </script>
 </body>
