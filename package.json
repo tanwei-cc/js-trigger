@@ -1,0 +1,34 @@
+{
+    "name": "js-trigger",
+    "version": "1.0.0",
+    "description": "",
+    "main": "dist/index.js",
+    "scripts": {
+        "test": "mocha --recursive -b",
+        "build": "node build.js",
+        "doc": "jsdoc2md src/*.js > doc/api.md",
+        "jsdoc": "jsdoc -c ./config/jsdoc.conf.json -d ./doc -e utf8 -r -R README.md",
+        "changelog": "github-changes -o tanwei-cc -r js-trigger --only-pulls --use-commit-body"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/tanwei-cc/js-trigger.git"
+    },
+    "author": "Tango <tanwei_yx@126.com>",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/tanwei-cc/js-trigger/issues"
+    },
+    "homepage": "https://github.com/tanwei-cc/js-trigger#readme",
+    "devDependencies": {
+        "babel-core": "^6.26.0",
+        "babel-loader": "^7.1.2",
+        "babel-preset-es2015": "^6.24.1",
+        "babel-register": "^6.26.0",
+        "jsdoc-to-markdown": "^3.0.0",
+        "mocha": "^3.5.3",
+        "ora": "^1.3.0",
+        "shelljs": "^0.7.8",
+        "webpack": "^3.5.6"
+    }
+}

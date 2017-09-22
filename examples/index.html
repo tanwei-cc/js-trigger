@@ -1,0 +1,258 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>js触发器 Examples</title>
+    <style>
+        #logs {
+            position: fixed;
+            bottom: 0px;
+            right: 5px;
+            margin-bottom: 0;
+            width: 300px;
+        }
+        
+        #logs>.panel-heading {
+            cursor: pointer;
+        }
+        
+        #logs .caret {
+            position: absolute;
+            right: 15px;
+            top: 18px;
+        }
+        
+        #logs>.panel-body {
+            display: none;
+            max-height: 200px;
+            overflow: auto;
+            padding: 2px;
+            font-size: 13px;
+        }
+        
+        #logs>.panel-body>* {
+            white-space: nowrap;
+        }
+        
+        #btnReset,
+        #btnStop,
+        #btnOpen {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container" style="width: 900px;">
+        <h1 class="text-center">js触发器 Examples</h1>
+        <br>
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label class="col-sm-2">触发器名称</label>
+                <div class="col-sm-10">
+                    <input name="name" class="form-control input-sm" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2">频次</label>
+                <div class="col-sm-10">
+                    <input name="frequency" class="form-control input-sm" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2">时间间隔(s)</label>
+                <div class="col-sm-10">
+                    <input name="interval" class="form-control input-sm" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2">最多触发次数</label>
+                <div class="col-sm-10">
+                    <input name="maxHandlerFrequency" class="form-control input-sm" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2">距离上次触发时间间隔(s)</label>
+                <div class="col-sm-10">
+                    <input name="handlerInterval" class="form-control input-sm" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2">追加数据</label>
+                <div class="col-sm-10">
+                    <select name="data" class="form-control input-sm">
+                        <option value="autoNum">自增数字</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2">是否首次立刻触发</label>
+                <div class="col-sm-10">
+                    <input type="checkbox" name="firstTrigger" checked="true" />
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-sm-2"></label>
+                <div class="col-sm-10">
+                    <a id="btnRun" class="btn btn-success">运行</a>
+                    <a id="btnReset" class="btn btn-success">重置</a>
+                    <a id="btnStop" class="btn btn-danger">停止运行</a>
+                    <a id="btnOpen" class="btn btn-success">继续运行</a>
+                </div>
+            </div>
+        </form>
+        <div id="logs" class="panel panel-default">
+            <div class="panel-heading">日志记录
+                <a id="btnLogClear">清空</a>
+                <span class="caret pull-right"></span>
+            </div>
+            <div class="panel-body"></div>
+        </div>
+    </div>
+
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="../dist/index.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/underscore.js/1.8.3/underscore-min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script>
+        Date.prototype.format = function(fmt) { //author: meizz 
+            var o = {
+                "M+": this.getMonth() + 1, //月份 
+                "d+": this.getDate(), //日 
+                "h+": this.getHours(), //小时 
+                "m+": this.getMinutes(), //分 
+                "s+": this.getSeconds(), //秒 
+                "q+": Math.floor((this.getMonth() + 3) / 3), //季度 
+                "S": this.getMilliseconds() //毫秒 
+            };
+            if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+            for (var k in o)
+                if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+            return fmt;
+        };
+        var util = {
+            _id: 0,
+            id: function() {
+                return ++this._id;
+            },
+            getLabel: function(name) {
+                return $('[name="' + name + '"]').parent().prev().text();
+            },
+            getProps: function() {
+                var data = $("form").serializeArray();
+                var props = {};
+                _.map(data, function(item) {
+                    props[item.name] = item.value;
+                });
+                return props;
+            },
+            validProps: function(props) {
+                var errors = [];
+                if (!Trigger.checkConfig(props)) {
+                    errors.push('请按文档正确配置');
+                }
+
+                _.each(['frequency', 'interval', 'maxHandlerFrequency', 'handlerInterval'], function(key) {
+                    if (props[key] && !_.isNumber(props[key]) && props[key] <= 0) {
+                        errors.push(util.getLabel(key) + '：格式错误');
+                    }
+                });
+
+                if (errors.length) {
+                    alert(errors.join('\r\n'));
+                    return false;
+                }
+                return true;
+            },
+            log: function(state) {
+                var msg = state || '';
+                var el = $("#logs>.panel-body");
+                if (_.isObject(state)) {
+                    msg = JSON.stringify(state);
+                }
+                msg = '[' + (new Date()).format("hh:mm:ss") + ']' + msg;
+                el.append('<div>' + msg + '</div>');
+                setTimeout(function() {
+                    el[0].scrollTop = el[0].scrollHeight;
+                }, 50);
+            },
+            logOpen: function() {
+                $("#logs>.panel-body").show();
+            },
+            logClear: function() {
+                $("#logs>.panel-body").empty();
+            }
+        };
+        var trigger;
+        var timer;
+
+        $(function() {
+            var btnRun = $("#btnRun");
+            var btnReset = $("#btnReset");
+            var btnStop = $("#btnStop");
+            var btnOpen = $("#btnOpen");
+            var btnLogClear = $("#btnLogClear");
+
+            btnRun.click(function() {
+                var props = util.getProps();
+
+                if (!util.validProps(props)) return;
+
+                Trigger.removeAll();
+                clearInterval(timer);
+
+                trigger = Trigger.create(props);
+                trigger.on(function(state) {
+                    util.log(state);
+                });
+
+                trigger.check('第' + util.id() + '次check');
+                timer = setInterval(function() {
+                    trigger.check('第' + util.id() + '次check');
+                }, 1000);
+                util.logOpen();
+                btnRun.hide();
+                btnReset.show();
+                btnStop.show();
+                btnOpen.hide();
+            });
+
+            btnReset.click(function() {
+                var props = util.getProps();
+
+                if (!util.validProps(props)) return;
+
+                trigger.reset(props);
+                util.log("触发器" + btnReset.text());
+            });
+
+            btnStop.click(function() {
+                trigger.stop();
+                btnStop.hide();
+                btnOpen.show();
+                util.log("触发器" + btnStop.text());
+            });
+
+            btnOpen.click(function() {
+                trigger.open();
+                btnStop.show();
+                btnOpen.hide();
+                util.log("触发器" + btnOpen.text());
+            });
+
+            btnLogClear.click(function(ev) {
+                // ev.stopPropagation();
+                util.logClear();
+            });
+
+            // $(".panel-heading").click(function() {
+            //     $(this).nextAll(".panel-body").toggle();
+            // });
+        });
+    </script>
+</body>
+
+</html>
