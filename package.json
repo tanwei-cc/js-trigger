@@ -6,8 +6,8 @@
     "scripts": {
         "test": "mocha --recursive -b",
         "build": "node build.js",
-        "doc": "jsdoc2md src/*.js > doc/api.md",
-        "jsdoc": "jsdoc -c ./config/jsdoc.conf.json -d ./doc -e utf8 -r -R README.md",
+        "doc": "jsdoc2md src/*.js > docs/api.md",
+        "jsdoc": "jsdoc -c ./config/jsdoc.conf.json -d ./docs -e utf8 -r -R README.md",
         "changelog": "github-changes -o tanwei-cc -r js-trigger --only-pulls --use-commit-body"
     },
     "repository": {

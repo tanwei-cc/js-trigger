@@ -18,6 +18,7 @@ Trigger是一个JavaScript触发器插件，可通过指定频次、指定时间
         * [.on(handler)](#Trigger+on)
         * [.off(handler)](#Trigger+off)
     * _static_
+        * [.checkConfig(props)](#Trigger.checkConfig) ⇒ <code>boolean</code>
         * [.create(props)](#Trigger.create)
         * [.each()](#Trigger.each)
         * [.resetAll()](#Trigger.resetAll)
@@ -35,12 +36,13 @@ frequency/interval 至少传入一个
 
 | Param | Type | Description |
 | --- | --- | --- |
-| props | <code>Object</code> | [必须]触发器配置 |
+| props | <code>Object</code> | 触发器配置 |
 | props.name | <code>string</code> | 触发器名称 |
-| props.frequency | <code>number</code> | [正整数]限制频次触发 |
-| props.interval | <code>number</code> | [正整数]限制时间间隔触发(s) |
-| props.maxHandlerFrequency | <code>number</code> | [正整数]最多处理次数 |
-| props.handlerInterval | <code>number</code> | [正整数]处理时间间隔(s)，距离上次处理结束时间间隔 |
+| props.frequency | <code>number</code> | [>0]限制频次触发，每隔N次触发 |
+| props.interval | <code>number</code> | [>0]限制时间间隔触发(s)，每隔N(s)触发 |
+| props.maxHandlerFrequency | <code>number</code> | [>0]最多触发次数 |
+| props.handlerInterval | <code>number</code> | [>0]距离上次触发时间间隔(s) |
+| props.firstTrigger | <code>boolean</code> | 是否首次立刻触发 |
 
 **Example**  
 ```js
@@ -65,7 +67,7 @@ Trigger.create({
 
 | Param | Type | Description |
 | --- | --- | --- |
-| data | <code>\*</code> | 追加数据，每次调用都进行追加 |
+| data | <code>\*</code> | 追加数据，方便触发器执行时获得累加的数据 |
 
 <a name="Trigger+open"></a>
 
@@ -118,6 +120,17 @@ Trigger.create({
 | --- | --- | --- |
 | handler | <code>function</code> | 处理函数 |
 
+<a name="Trigger.checkConfig"></a>
+
+### Trigger.checkConfig(props) ⇒ <code>boolean</code>
+检查触发器配置是否有效
+
+**Kind**: static method of [<code>Trigger</code>](#Trigger)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| props | <code>Object</code> | [详情](#new_Trigger_new) |
+
 <a name="Trigger.create"></a>
 
 ### Trigger.create(props)
@@ -162,7 +175,7 @@ Trigger.create({
 
 | Param | Type | Description |
 | --- | --- | --- |
-| handlerCounter | <code>number</code> | 处理函数执行次数统计 |
+| handlerCounter | <code>number</code> | 触发次数统计 |
 | startTime | <code>Date</code> | 开始时间 |
 | endTime | <code>Date</code> | 结束时间 |
 | duration | <code>number</code> | 持续时间(ms) |

@@ -24,9 +24,6 @@ Browser Supported
 | Mobile   | Opera Mobile    | 11.50   |
 | Mobile   | Safari Mobile   | all     |
 
-[Examples](examples/index.html)
-----------
-
 Installation
 ----------
 
@@ -34,8 +31,11 @@ Installation
 npm install --save tanwei-cc/js-trigger
 ```
 
-[Changelog](CHANGELOG.md)
+[Examples](https://tanwei-cc.github.io/js-trigger/examples/index.html)
 ----------
 
-[Documentation](doc/api.md)
+[Documentation](docs/api.md)
+----------
+
+[Changelog](CHANGELOG.md)
 ----------
