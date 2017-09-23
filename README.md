@@ -3,6 +3,8 @@ js-trigger
 
 https://tanwei-cc.github.io/js-trigger/
 
+[前端问题]按钮点的太快、日志打的太多、客户网络不明等 - 如何解决(https://segmentfault.com/a/1190000011324312)
+
 Features
 ----------
 

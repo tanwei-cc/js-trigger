@@ -2,10 +2,6 @@
 
 ## Trigger
 Trigger是一个JavaScript触发器插件，可通过指定频次、指定时间内触发指定的处理函数，使用场景如：限制日志频繁上传、限制ajax频繁调用、错误提醒、网络状态检测等
-引入方式：
-import Trigger from 'js-trigger'; //ES6
-var Trigger = require('js-trigger').default; //ES5
-window.Trigger; //browser
 
 **Kind**: global class  
 **Version**: 1.0.0  
@@ -26,6 +22,7 @@ window.Trigger; //browser
         * [.create(props)](#Trigger.create)
         * [.each()](#Trigger.each)
         * [.resetAll()](#Trigger.resetAll)
+        * [.openAll()](#Trigger.openAll)
         * [.stopAll()](#Trigger.stopAll)
         * [.removeAll()](#Trigger.removeAll)
     * _inner_
@@ -156,6 +153,12 @@ Trigger.create({
 
 ### Trigger.resetAll()
 重置所有触发器实例，同时也会打开触发器
+
+**Kind**: static method of [<code>Trigger</code>](#Trigger)  
+<a name="Trigger.openAll"></a>
+
+### Trigger.openAll()
+打开所有触发器实例
 
 **Kind**: static method of [<code>Trigger</code>](#Trigger)  
 <a name="Trigger.stopAll"></a>
