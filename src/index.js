@@ -132,6 +132,7 @@ class Trigger {
         const endTime = new Date();
         const duration = endTime - startTime;
 
+        state.startTime = endTime;
         state.endTime = endTime;
         state.counter = 0;
         state.handlerCounter++;
